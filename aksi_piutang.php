@@ -14,6 +14,9 @@ if($_GET['act'] == 't'){
 		values('$tanggal','$catatan','$debitur','$jumlah','$user')";
 		$hasil = mysqli_query($con, $query);
 
+		$query2 = "INSERT INTO pemasukan(tanggal,catatan,jumlah,user) values('$tanggal','$catatan','$jumlah','$user')";
+		$hasil2 = mysqli_query($con, $query2);
+
 		echo "<script>window.alert('Data Berhasil Ditambahkan');
 						window.location=('main.php?module=piutang')</script>";
 	}else{

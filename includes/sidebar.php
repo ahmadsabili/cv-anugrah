@@ -22,7 +22,7 @@ if($_SESSION['role'] == 'Admin'){
 	<div class="collapse navbar-collapse  w-auto h-auto max-height-vh-100" id="sidenav-collapse-main">
 		<ul class="navbar-nav">
 			<li class="nav-item">
-				<a class="nav-link text-white <?php if($_GET['module'] == 'dashboard'){ echo 'active bg-gradient-warning';} ?>" href="main.php?module=dashboard">
+				<a class="nav-link text-white <?php if($_GET['module'] == 'dashboard' || $_GET['module'] == 'home'){ echo 'active bg-gradient-warning';} ?>" href="main.php?module=dashboard">
 					<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 						<i class="material-icons opacity-10" translate="no">table_view</i>
 					</div>

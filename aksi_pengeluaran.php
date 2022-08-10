@@ -3,6 +3,7 @@ include "includes/koneksi.php";
 
 if($_GET['act'] == 't'){
 	$tanggal      	= $_POST['tanggal'];
+	$modal			= $_POST['modal'];
 	$catatan  		= $_POST['catatan'];
 	$jumlah         = $_POST['jumlah'];
 	$user         	= $_POST['user'];
@@ -10,14 +11,14 @@ if($_GET['act'] == 't'){
 	
 
 	if($_POST['id_pengeluaran'] == ''){
-		$query = "INSERT into pengeluaran(tanggal,catatan,jumlah,user) 
-		values('$tanggal','$catatan','$jumlah','$user')";
+		$query = "INSERT into pengeluaran(tanggal, modal, catatan,jumlah,user) 
+		values('$tanggal', '$modal', '$catatan','$jumlah','$user')";
 		$hasil = mysqli_query($con, $query);
 
 		echo "<script>window.alert('Data Berhasil Ditambahkan');
 						window.location=('main.php?module=pengeluaran')</script>";
 	}else{
-		mysqli_query($con, "UPDATE pengeluaran SET tanggal = '$tanggal', catatan = '$catatan', jumlah = '$jumlah' where id_pengeluaran = '$_POST[id_pengeluaran]'");
+		mysqli_query($con, "UPDATE pengeluaran SET tanggal = '$tanggal', modal = '$modal' , catatan = '$catatan', jumlah = '$jumlah' where id_pengeluaran = '$_POST[id_pengeluaran]'");
 
 		echo "<script>window.alert('Data Berhasil Dirubah');
 		window.location=('main.php?module=pengeluaran')</script>";

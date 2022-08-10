@@ -64,6 +64,7 @@ if(!isset($_SESSION['nama'])){
 		$('#catatan').val($(this).attr("data-catatan"));
 		$('#jumlah').val($(this).attr("data-jumlah"));
 		$('#id_pengeluaran').val($(this).attr("data-id"));
+		$('#modal').val($(this).attr("data-modal"));
 	});
 
 	$(document).on("click",".btnedithutang",function(){
@@ -74,6 +75,7 @@ if(!isset($_SESSION['nama'])){
 		$('#catatan').val($(this).attr("data-catatan"));
 		$('#jumlah').val($(this).attr("data-jumlah"));
 		$('#id_hutang').val($(this).attr("data-id"));
+		$('#jatuh_tempo').val($(this).attr("data-jatuh_tempo"));
 	});
 
 	$(document).on("click",".btneditpiutang",function(){

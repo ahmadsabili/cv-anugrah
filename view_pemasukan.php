@@ -41,8 +41,8 @@ include "includes/koneksi.php";
 										Jumlah Pemasukan</th>
 									<th>
 										User</th>
-									<th>
-										Status</th>
+									<!-- <th>
+										Status</th> -->
 									<th></th>
 								</tr>
 							</thead>
@@ -66,7 +66,7 @@ include "includes/koneksi.php";
                                         <td>
                                             <p class="text-xs text-secondary mb-0"><?= $row['nama'] ?></p>
                                         </td>
-                                        <td class="align-middle text-center text-sm">
+                                        <!-- <td class="align-middle text-center text-sm">
                                             <span
                                                 class="badge badge-sm <?= ($row['status'] == 'selesai') ? 'bg-gradient-success' : 'bg-gradient-secondary' ?>">
                                                 <?php if($row['status'] == 'selesai'): ?>
@@ -78,7 +78,7 @@ include "includes/koneksi.php";
                                                 </a>
                                                 <?php endif ?>
                                             </span>
-                                        </td>
+                                        </td> -->
                                         <td class="align-middle">
                                             <a href="aksi_pemasukan.php?&act=h&id=<?php echo $row['id_pemasukan'] ?>"
                                                 onclick="return confirm('Hapus ?')"
@@ -148,7 +148,7 @@ include "includes/koneksi.php";
 							<input type="number" name="jumlah" id="jumlah" required class="form-control">
 						</div>
 					</div>
-					<div class="row my-3">
+					<!-- <div class="row my-3">
 						<div class="input-group input-group-outline">
 							<select class="form-control" name="status" id="status" required>
 								<option value="">Pilih Status</option>
@@ -156,7 +156,7 @@ include "includes/koneksi.php";
 								<option value="pending">Pending</option>
 							</select>
 						</div>
-					</div>
+					</div> -->
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

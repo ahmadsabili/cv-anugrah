@@ -32,15 +32,12 @@ include "includes/koneksi.php";
 						<table class="table align-items-center mb-0" id="datatable">
 							<thead>
 								<tr>
-									<th>
-										Tanggal</th>
-									<th>
-										Catatan
-									</th>
-									<th>
-										Jumlah pengeluaran</th>
-									<th>
-										User</th>
+									<th>Tanggal</th>
+									<th>Modal</th>
+									<th>Catatan</th>
+									<th>Jumlah pengeluaran</th>
+									<th>Sisa Modal</th>
+									<th>User</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -54,11 +51,19 @@ include "includes/koneksi.php";
                                         <td class="align-middle text-center">
                                             <span class="text-secondary text-xs font-weight-bold"><?= $row['tanggal'] ?></span>
                                         </td>
+										<td>
+                                            <p class="text-xs font-weight-bold mb-0">Rp. <?= number_format($row['modal']) ?>
+                                            </p>
+                                        </td>
                                         <td>
                                             <p class="text-xs text-secondary mb-0"><?= $row['catatan'] ?></p>
                                         </td>
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">Rp. <?= number_format($row['jumlah']) ?>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">Rp. <?= number_format($row['modal'] - $row['jumlah']) ?>
                                             </p>
                                         </td>
                                         <td>
@@ -77,6 +82,7 @@ include "includes/koneksi.php";
 												data-tanggal="<?php echo $row['tanggal'] ?>"
 												data-catatan="<?php echo $row['catatan'] ?>"
 												data-jumlah="<?php echo $row['jumlah'] ?>"
+												data-modal="<?php echo $row['modal'] ?>"
                                                 class="text-secondary text-warning font-weight-bold text-xs btneditpengeluaran">
                                                 <i class="material-icons fa fa edit" translate="no">edit
                                                 </i>
@@ -106,7 +112,7 @@ include "includes/koneksi.php";
 				<div class="modal-header p-0 position-relative mt-n4 mx-3 z-index-2">
 					<div
 						class="w-100 bg-gradient-info shadow-info border-radius-lg pt-4 pb-3 d-flex justify-content-between">
-						<h6 class="modal-title text-white text-capitalize ps-3">pengeluaran</h6>
+						<h6 class="modal-title text-white text-capitalize ps-3">Pengeluaran</h6>
 						<button type="button" class="btn-close me-2" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
@@ -121,6 +127,12 @@ include "includes/koneksi.php";
 						</div>
 					</div>
 					<div class="row my-3">
+						<label>Modal</label>
+						<div class="input-group input-group-outline">
+							<input type="number" name="modal" id="modal" required class="form-control">
+						</div>
+					</div>
+					<div class="row my-3">
 						<label>Catatan</label>
 						<div class="input-group input-group-outline">
 							<textarea name="catatan" id="catatan" class="form-control" cols="10" rows="3"></textarea>
@@ -132,7 +144,7 @@ include "includes/koneksi.php";
 							<input type="number" name="jumlah" id="jumlah" required class="form-control">
 						</div>
 					</div>
-					<div class="row my-3">
+					<!-- <div class="row my-3">
 						<div class="input-group input-group-outline">
 							<select class="form-control" name="status" id="status" required>
 								<option value="">Pilih Status</option>
@@ -140,7 +152,7 @@ include "includes/koneksi.php";
 								<option value="pending">Pending</option>
 							</select>
 						</div>
-					</div>
+					</div> -->
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

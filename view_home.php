@@ -73,10 +73,23 @@ $utang_bulan = mysqli_fetch_array($q_utang_bulan);
 $q_piutang = mysqli_query($con, "select sum(jumlah) as piutang_bulan from piutang where MONTH(tanggal) = '$bulansekarang' and YEAR(tanggal) = '$tahunsekarang ' ");
 $piutang_bulan = mysqli_fetch_array($q_piutang);
 
+$jatuh_tempo = mysqli_query($con, "SELECT * FROM hutang WHERE date(jatuh_tempo) = '$tglSekarang'");
+
 ?>
 
 <div class="container-fluid py-4">
 	<div class="row">
+		<?php
+		if($jatuh_tempo->num_rows > 0){
+			?>
+			<div class="col-md-12">
+				<div class="alert alert-warning text-white mb-5" role="alert">
+					<strong>Perhatian!</strong><a href="main.php?module=hutang" class="text-white"> Ada hutang yang jatuh tempo hari ini!</a>
+				</div>
+			</div>
+			<?php
+		}
+		?>
 		<div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
 			<div class="card">
 				<div class="card-header p-3 pt-2">

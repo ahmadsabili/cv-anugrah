@@ -41,6 +41,9 @@ include "includes/koneksi.php";
 									<th>
 										Catatan
 									</th>
+									<th>
+										Jatuh Tempo
+									</th>
 									<th>User</th>
 									<th></th>
 								</tr>
@@ -65,6 +68,17 @@ include "includes/koneksi.php";
 										<td>
                                             <p class="text-xs text-secondary mb-0"><?= $row['catatan'] ?></p>
                                         </td>
+										<td>
+											<?php
+											if($row['jatuh_tempo'] == date('Y-m-d')){
+												echo "<span class='text-xs badge bg-gradient-warning font-weight-bold'>".$row['jatuh_tempo']."</span>";
+											} elseif($row['jatuh_tempo'] < date('Y-m-d')){
+												echo "<span class='text-xs badge bg-gradient-danger font-weight-bold'>".$row['jatuh_tempo']."</span>";
+											} else {
+												echo "<span class='text-secondary text-xs font-weight-bold'>".$row['jatuh_tempo']."</span>";
+											}
+											?>
+                                        </td>
                                         <td>
                                             <p class="text-xs text-secondary mb-0"><?= $row['nama'] ?></p>
                                         </td>
@@ -81,6 +95,7 @@ include "includes/koneksi.php";
 												data-kreditur="<?php echo $row['kreditur'] ?>"
 												data-catatan="<?php echo $row['catatan'] ?>"
 												data-jumlah="<?php echo $row['jumlah'] ?>"
+												data-jatuh_tempo="<?php echo $row['jatuh_tempo'] ?>"
                                                 class="text-secondary text-warning font-weight-bold text-xs btnedithutang">
                                                 <i class="material-icons fa fa edit" translate="no">edit
                                                 </i>
@@ -140,6 +155,12 @@ include "includes/koneksi.php";
 						<label>Catatan</label>
 						<div class="input-group input-group-outline">
 							<textarea name="catatan" id="catatan" class="form-control" cols="10" rows="3"></textarea>
+						</div>
+					</div>
+					<div class="row my-3">
+						<label>Jatuh Tempo</label>
+						<div class="input-group input-group-outline">
+							<input type="date" name="jatuh_tempo" id="jatuh_tempo" required class="form-control">
 						</div>
 					</div>
 				</div>

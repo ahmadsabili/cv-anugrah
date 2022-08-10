@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jul 26, 2022 at 06:44 PM
--- Server version: 5.7.33
--- PHP Version: 7.4.19
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 10 Agu 2022 pada 19.05
+-- Versi server: 10.4.24-MariaDB
+-- Versi PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `banner`
+-- Struktur dari tabel `banner`
 --
 
 CREATE TABLE `banner` (
@@ -34,7 +34,7 @@ CREATE TABLE `banner` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `banner`
+-- Dumping data untuk tabel `banner`
 --
 
 INSERT INTO `banner` (`id_banner`, `tanggal`, `banner`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `banner` (`id_banner`, `tanggal`, `banner`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `galeri`
+-- Struktur dari tabel `galeri`
 --
 
 CREATE TABLE `galeri` (
@@ -55,7 +55,7 @@ CREATE TABLE `galeri` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `galeri`
+-- Dumping data untuk tabel `galeri`
 --
 
 INSERT INTO `galeri` (`id`, `gambar`, `tanggal`) VALUES
@@ -71,7 +71,7 @@ INSERT INTO `galeri` (`id`, `gambar`, `tanggal`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `home`
+-- Struktur dari tabel `home`
 --
 
 CREATE TABLE `home` (
@@ -83,7 +83,7 @@ CREATE TABLE `home` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `home`
+-- Dumping data untuk tabel `home`
 --
 
 INSERT INTO `home` (`id`, `judul`, `slogan`, `alamat`, `kontak`) VALUES
@@ -92,7 +92,7 @@ INSERT INTO `home` (`id`, `judul`, `slogan`, `alamat`, `kontak`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hutang`
+-- Struktur dari tabel `hutang`
 --
 
 CREATE TABLE `hutang` (
@@ -101,13 +101,21 @@ CREATE TABLE `hutang` (
   `kreditur` varchar(100) NOT NULL,
   `catatan` text NOT NULL,
   `jumlah` int(11) NOT NULL,
+  `jatuh_tempo` date DEFAULT NULL,
   `user` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `hutang`
+--
+
+INSERT INTO `hutang` (`id_hutang`, `tanggal`, `kreditur`, `catatan`, `jumlah`, `jatuh_tempo`, `user`) VALUES
+(4, '2022-08-10', 'BANK MANDIRI', 'abcde', 50000, '2022-08-10', '1');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jam_buka`
+-- Struktur dari tabel `jam_buka`
 --
 
 CREATE TABLE `jam_buka` (
@@ -117,7 +125,7 @@ CREATE TABLE `jam_buka` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `jam_buka`
+-- Dumping data untuk tabel `jam_buka`
 --
 
 INSERT INTO `jam_buka` (`id`, `hari`, `jam`) VALUES
@@ -132,7 +140,7 @@ INSERT INTO `jam_buka` (`id`, `hari`, `jam`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `layanan`
+-- Struktur dari tabel `layanan`
 --
 
 CREATE TABLE `layanan` (
@@ -142,7 +150,7 @@ CREATE TABLE `layanan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `layanan`
+-- Dumping data untuk tabel `layanan`
 --
 
 INSERT INTO `layanan` (`id`, `nama`, `gambar`) VALUES
@@ -158,7 +166,7 @@ INSERT INTO `layanan` (`id`, `nama`, `gambar`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pemasukan`
+-- Struktur dari tabel `pemasukan`
 --
 
 CREATE TABLE `pemasukan` (
@@ -170,24 +178,42 @@ CREATE TABLE `pemasukan` (
   `status` enum('pending','selesai') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `pemasukan`
+--
+
+INSERT INTO `pemasukan` (`id_pemasukan`, `tanggal`, `catatan`, `jumlah`, `user`, `status`) VALUES
+(11, '2022-08-10', 'abcde', 5000000, '1', 'pending'),
+(12, '2022-08-10', 'sfsfsfsfs', 125000, '1', '');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pengeluaran`
+-- Struktur dari tabel `pengeluaran`
 --
 
 CREATE TABLE `pengeluaran` (
   `id_pengeluaran` int(11) NOT NULL,
   `tanggal` date NOT NULL,
+  `modal` int(11) NOT NULL,
   `catatan` text NOT NULL,
   `jumlah` int(11) NOT NULL,
   `user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `pengeluaran`
+--
+
+INSERT INTO `pengeluaran` (`id_pengeluaran`, `tanggal`, `modal`, `catatan`, `jumlah`, `user`) VALUES
+(5, '2022-08-10', 300000, 'abcde', 50000, 1),
+(6, '2022-08-10', 200000, 'asdfghjk', 70000, 1),
+(7, '2022-08-11', 250000, 'tes', 150000, 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `piutang`
+-- Struktur dari tabel `piutang`
 --
 
 CREATE TABLE `piutang` (
@@ -199,10 +225,17 @@ CREATE TABLE `piutang` (
   `user` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `piutang`
+--
+
+INSERT INTO `piutang` (`id_piutang`, `tanggal`, `debitur`, `catatan`, `jumlah`, `user`) VALUES
+(5, '2022-08-10', 'PT SOSRO', 'abcde', 5000000, '1');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -214,12 +247,12 @@ CREATE TABLE `user` (
   `no_telp` varchar(13) NOT NULL,
   `foto` varchar(255) NOT NULL,
   `role` enum('admin','pegawai','pimpinan') NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `is_active` enum('0','1') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`id_user`, `username`, `nama`, `email`, `password`, `no_telp`, `foto`, `role`, `create_at`, `is_active`) VALUES
@@ -232,125 +265,125 @@ INSERT INTO `user` (`id_user`, `username`, `nama`, `email`, `password`, `no_telp
 --
 
 --
--- Indexes for table `banner`
+-- Indeks untuk tabel `banner`
 --
 ALTER TABLE `banner`
   ADD PRIMARY KEY (`id_banner`);
 
 --
--- Indexes for table `galeri`
+-- Indeks untuk tabel `galeri`
 --
 ALTER TABLE `galeri`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `home`
+-- Indeks untuk tabel `home`
 --
 ALTER TABLE `home`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `hutang`
+-- Indeks untuk tabel `hutang`
 --
 ALTER TABLE `hutang`
   ADD PRIMARY KEY (`id_hutang`);
 
 --
--- Indexes for table `jam_buka`
+-- Indeks untuk tabel `jam_buka`
 --
 ALTER TABLE `jam_buka`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `layanan`
+-- Indeks untuk tabel `layanan`
 --
 ALTER TABLE `layanan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `pemasukan`
+-- Indeks untuk tabel `pemasukan`
 --
 ALTER TABLE `pemasukan`
   ADD PRIMARY KEY (`id_pemasukan`);
 
 --
--- Indexes for table `pengeluaran`
+-- Indeks untuk tabel `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
   ADD PRIMARY KEY (`id_pengeluaran`);
 
 --
--- Indexes for table `piutang`
+-- Indeks untuk tabel `piutang`
 --
 ALTER TABLE `piutang`
   ADD PRIMARY KEY (`id_piutang`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `banner`
+-- AUTO_INCREMENT untuk tabel `banner`
 --
 ALTER TABLE `banner`
   MODIFY `id_banner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `galeri`
+-- AUTO_INCREMENT untuk tabel `galeri`
 --
 ALTER TABLE `galeri`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `home`
+-- AUTO_INCREMENT untuk tabel `home`
 --
 ALTER TABLE `home`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `hutang`
+-- AUTO_INCREMENT untuk tabel `hutang`
 --
 ALTER TABLE `hutang`
-  MODIFY `id_hutang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_hutang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `jam_buka`
+-- AUTO_INCREMENT untuk tabel `jam_buka`
 --
 ALTER TABLE `jam_buka`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `layanan`
+-- AUTO_INCREMENT untuk tabel `layanan`
 --
 ALTER TABLE `layanan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `pemasukan`
+-- AUTO_INCREMENT untuk tabel `pemasukan`
 --
 ALTER TABLE `pemasukan`
-  MODIFY `id_pemasukan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_pemasukan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `pengeluaran`
+-- AUTO_INCREMENT untuk tabel `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
-  MODIFY `id_pengeluaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pengeluaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `piutang`
+-- AUTO_INCREMENT untuk tabel `piutang`
 --
 ALTER TABLE `piutang`
-  MODIFY `id_piutang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_piutang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
